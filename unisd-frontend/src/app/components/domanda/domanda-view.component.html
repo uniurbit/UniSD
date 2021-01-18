@@ -1,0 +1,172 @@
+<ngx-loading [show]="isLoading" [config]="{ backdropBorderRadius: '0px' }"></ngx-loading>
+
+<div class="container-fluid"  *ngIf="model" >
+
+  <button *ngIf="isVisibleNuovaIstanza()" class="btn btn-outline-primary rounded-lg mb-2" (click)="onNuovaIstanza()" >              
+    <span class="oi oi-document"></span>
+    <span class="ml-2">Nuova istanza</span>
+  </button> 
+
+  <app-riquadro-wrapper *ngIf="model && model.stato==0"> 
+    <h5 class="text-center text-danger">Domanda in stato di bozza, premere il bottone "TERMINA" per concludere e inoltrare la domanda.</h5>
+  </app-riquadro-wrapper>
+
+  <app-intestazione [item]="modelIntestazione" (download)="download($event)"></app-intestazione>
+
+  <app-riquadro-wrapper>   
+    <h6>{{ 'd1_title1' | translate }}</h6>
+    <table>
+      <tr>
+        <td style="width: 30px; padding-left: 10px;"><span class="oi oi-check iconic"></span></td>
+        <td class="text">{{ checkFalse(model.contenuto.flag_didattica) }} {{ model.contenuto.flag_didattica ?  ('d1_label_on' | translate: {periodo: numPeriodoTitle()} ) : ('d1_label_off' | translate)}}</td>
+        </tr>
+        <!--model.contenuto.flag_didattica occorre che ... -->
+        <tr *ngIf="model.contenuto.flag_didattica == true && model.contenuto.didattica.flag_didattica_conferma != null">
+          <td style="width: 30px; padding-left: 10px;"><span class="oi oi-check iconic"></span></td>
+          <td class="text">{{ model.contenuto.didattica.flag_didattica_conferma ?  ('didattica_conferma_on' | translate) : ('didattica_conferma_off' | translate)}}</td>
+        </tr>
+      <tr>
+        <td style="width: 30px; padding-left: 10px;"><span class="oi oi-check iconic"></span></td>
+        <td class="text">{{ checkFalse(model.contenuto.flag_aspettativa) }} {{ 'd1_label1' | translate : {periodo: numPeriodoTitle()} }}</td>
+      </tr>
+    </table>
+  </app-riquadro-wrapper>
+
+  <app-riquadro-wrapper>   
+    <h6>{{ 'd1_title2' | translate }}</h6>
+    <table>
+      <tr>
+        <td style="width: 30px; padding-left: 10px;"><span class="oi oi-check iconic"></span></td>
+        <td class="text">{{ checkFalse(model.contenuto.flag_ricerca) }} {{ 'd1_label2' | translate : {periodo: numPeriodoTitle()} }}</td>
+      </tr>
+    </table>
+  </app-riquadro-wrapper>
+
+  <app-riquadro-wrapper>   
+    <h6>{{ 'd1_title3' | translate }}</h6>
+    <table>
+      <tr>
+        <td style="width: 30px; padding-left: 10px;"><span class="oi oi-check iconic"></span></td>
+        <td class="text">{{ checkFalse(model.contenuto.flag_gestionale) }} {{ 'd1_label3' | translate : {periodo: numPeriodoTitle()} }}</td>
+      </tr>
+    </table>
+  </app-riquadro-wrapper>
+
+  <app-riquadro-wrapper>   
+    <h6>{{ 'd1_title4' | translate }}</h6>
+    <table>
+      <tr>
+        <td style="width: 30px; padding-left: 10px;"><span class="oi oi-check iconic"></span></td>
+        <td class="text">{{ model.contenuto.flag_sanzioni ? 'di essere': 'di non essere' }} {{ 'd1_label4' |  translate : {periodo: numPeriodoTitle()} }}</td>
+      </tr>
+    </table>
+  </app-riquadro-wrapper>
+
+  <app-riquadro-wrapper *ngIf="model.contenuto.flag_reinoltro==1 || model.contenuto.flag_reinoltro==true">   
+    <table>
+      <tr>
+        <td *ngIf="model.stato==1" class="text" style=" padding-left: 10px;">La presente domanda inoltrata il {{ model.data_inoltro.replace(" ", " alle ") }} sostituisce integralmente le precedenti inoltrate.</td>
+        <td *ngIf="model.stato==0" class="text" style=" padding-left: 10px;">{{ 'nuova_istanza' | translate }}</td>
+      </tr>
+    </table>
+  </app-riquadro-wrapper>
+
+  <app-collapse-riquadro-wrapper *ngIf="model.contenuto.didattica || model.contenuto.ricerca || model.contenuto.gestionale" [options]="{ type: 'primary', title:'Relazione attività', isCollapsed: true}" >
+    <app-collapse-riquadro-wrapper *ngIf="model.contenuto.didattica" [options]="{ type: 'secondary', title:'Attività didattica svolta negli anni accademici', isCollapsed: false}"  >     
+      <p *ngIf="!model.contenuto.flag_didattica">Nessuna attività didattica svolta nel {{triennio() ? 'triennio': 'biennio'}} accademico precedente.</p>
+      <table *ngIf="model.contenuto.flag_didattica">
+        <tr>
+          <div>{{ annoAccademico(1) }}</div>
+          <p class="angular-with-newlines" [innerHtml]="model.contenuto.didattica.descr_1"></p>
+        </tr>
+        <tr>
+          <div>{{ annoAccademico(2) }}</div>
+          <p class="angular-with-newlines" [innerHtml]="model.contenuto.didattica.descr_2"></p>
+        </tr>
+        <tr *ngIf="model.contenuto.didattica.descr_3 && triennio()">
+          <div>{{ annoAccademico(3) }}</div>
+          <p class="angular-with-newlines" [innerHtml]="model.contenuto.didattica.descr_3"></p>
+        </tr>
+      </table>
+    </app-collapse-riquadro-wrapper> 
+
+    <app-collapse-riquadro-wrapper *ngIf="model.contenuto.ricerca" [options]="{ type: 'secondary', title:'Attività di ricerca svolta negli anni solari', isCollapsed: false}"  >     
+      <p *ngIf="!model.contenuto.flag_ricerca">Nessuna attività di ricerca svolta nel {{triennio() ? 'triennio': 'biennio'}} solare precedente.</p>
+      <table *ngIf="model.contenuto.flag_ricerca">
+        <tr>
+          <div>{{ anno(1) }}</div>
+          <p class="angular-with-newlines" [innerHtml]="model.contenuto.ricerca.descr_1"></p>
+        </tr>
+        <tr>
+          <div>{{ anno(2) }}</div>
+          <p class="angular-with-newlines" [innerHtml]="model.contenuto.ricerca.descr_2"></p>
+        </tr>
+        <tr *ngIf="model.contenuto.ricerca.descr_3 && triennio()">
+          <div>{{ anno(3) }}</div>
+          <p class="angular-with-newlines" [innerHtml]="model.contenuto.ricerca.descr_3"></p>
+        </tr>
+      </table>
+    </app-collapse-riquadro-wrapper> 
+
+    <app-collapse-riquadro-wrapper *ngIf="model.contenuto.gestionale" [options]="{ type: 'secondary', title:'Attività gestionale svolta negli anni accademici', isCollapsed: false}"  >     
+      <p *ngIf="!model.contenuto.flag_gestionale">Nessuna attività gestionale svolta nel {{triennio() ? 'triennio': 'biennio'}} accademico precedente.</p>
+      <table *ngIf="model.contenuto.flag_gestionale">
+        <tr>
+          <div>{{ annoAccademico(1) }}</div>
+          <p class="angular-with-newlines" [innerHtml]="model.contenuto.gestionale.descr_1"> </p>
+        </tr>
+        <tr>
+          <div>{{ annoAccademico(2) }}</div>
+          <p class="angular-with-newlines" [innerHtml]="model.contenuto.gestionale.descr_2"></p>
+        </tr>
+        <tr *ngIf="model.contenuto.gestionale.descr_3 && triennio()">
+          <div>{{ annoAccademico(3) }}</div>
+          <p class="angular-with-newlines" [innerHtml]="model.contenuto.gestionale.descr_3"></p>
+        </tr>
+      </table>
+    </app-collapse-riquadro-wrapper> 
+  </app-collapse-riquadro-wrapper>
+   <!--Allegati-->
+  <app-collapse-riquadro-wrapper [options]="{ type: 'primary', title:'a1_docum' | translate}"  *ngIf="isInoltrata()" >     
+    <table>
+      <tr>
+        <td style="width: 30px; padding-left: 10px;">
+          <span class="oi oi-paperclip iconic"></span>
+        </td>
+        <td>
+          <a href="javascript:void(0)" (click)="downloadDomanda()" title="">
+            <span *ngIf="isInoltrata()">{{ 'summary_txt3_inoltrata' | translate }}</span>
+          </a>
+        </td>
+      </tr>
+    </table>
+  </app-collapse-riquadro-wrapper>
+  
+  <div class="form-footer text-right">  
+
+    <ng-container *ngxPermissionsOnly="['OP_DOCENTE','SUPER-ADMIN']">
+      <button type="button" *ngIf="isTerminabile()"  class="btn btn-outline-secondary rounded mr-1" (click)="previewdomanda()"
+        title="{{ 'summary_title4' | translate }}">
+          <span class="oi oi-document iconic"></span>
+          <span class="ml-2">Visualizza domanda</span>
+      </button>
+    </ng-container>
+
+    <ng-container *ngxPermissionsOnly="['SUPER-ADMIN']">
+      <button type="button" *ngIf="model.stato === 1" class="btn btn-outline-secondary rounded mr-1" (click)="previewdomanda()"
+        title="{{ 'summary_title4' | translate }}">
+          <span class="oi oi-document iconic"></span>
+          <span class="ml-2">Visualizza domanda</span>
+      </button>
+    </ng-container>
+
+    <!-- *ngxPermissionsOnly="['OP_DOCENTE','SUPER-ADMIN']" -->
+    <button *ngIf="isTerminabile()" class="btn btn-outline-secondary rounded mr-1" (click)="update()" >
+      <span class="oi oi-pencil iconic"  title="{{ 'btn_upd_title' | translate }}"></span>
+      <span class="ml-2">{{ 'btn_upd_title' | translate }}</span>
+    </button>
+
+    <button type="button" *ngIf="isTerminabile()" class="btn btn-outline-secondary btn-warning rounded mr-1 ml-2" (click)="termina()" title="{{ 'btn_end_title' | translate }}" >{{ 'btn_end' | translate }}</button>
+    <!-- <app-termina-button [item]="model" *ngIf="model.stato === 0" (update)="isLoadingChange($event)"></app-termina-button> -->
+  </div>
+</div>

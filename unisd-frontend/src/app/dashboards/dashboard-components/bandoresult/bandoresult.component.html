@@ -1,0 +1,17 @@
+
+
+  <ngx-loading [show]="isLoadingResult" [config]="{ backdropBorderRadius: '4px' }"></ngx-loading>
+  <form [formGroup]="form" >
+  <formly-form [model]="model" [fields]="resultMetadata" [form]="form">
+    
+  </formly-form> 
+  </form>
+  
+
+  <ng-template #tooltip let-row="row" let-value="value" let-i="index">
+    <span title="{{ value+'_tooltip' | translate}}"> {{ value | translate }} </span>
+  </ng-template>
+
+  <ng-template #seleziona ngx-datatable-cell-template let-row="row" let-rowIndex="rowIndex" let-value="value" >
+    <button type="button" class="btn btn-sm btn-outline-primary" (click)="rowSelection(row)">Seleziona</button>  
+  </ng-template>  

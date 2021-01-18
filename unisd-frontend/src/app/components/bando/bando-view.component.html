@@ -1,0 +1,139 @@
+<ngx-loading [show]="isLoading" [config]="{ backdropBorderRadius: '0px' }"></ngx-loading>
+
+<div class="container-fluid" *ngIf="model && model.descrizione">
+  <app-riquadro-wrapper *ngIf="model">
+    <h5 class="text-center">{{ model.descrizione }}</h5>
+  </app-riquadro-wrapper>
+  <app-riquadro-wrapper *ngIf="model">
+    <div class="row">
+      <app-list-item class="col-md-12" label="{{ 'bando_label1' | translate }}">{{ model.descrizione }}</app-list-item>
+
+      <app-list-item class="col-md-12" label="Data inizio">{{ model.data_inizio }}</app-list-item>
+      <app-list-item class="col-md-12" label="Data Fine">{{ model.data_fine }}</app-list-item>
+
+      <app-list-item class="col-md-12" label="{{ '00_int2' | translate }}">
+        {{ model.periodo_inizio }}/{{ model.periodo_fine }}</app-list-item>
+
+      <app-list-item class="col-md-12" label="Sessione">{{ model.sessione | translate }}</app-list-item>
+    </div>
+  </app-riquadro-wrapper>
+  <app-riquadro-wrapper *ngIf="model">
+    <div class="row">
+      <app-list-item class="col-md-12" label="Stato">{{ model.current_state | translate }}</app-list-item>
+      <app-list-item class="col-md-12" label="Numero fascicolo">{{ model.num_fascicolo }}</app-list-item>
+    </div>
+  </app-riquadro-wrapper>
+  <app-collapse-riquadro-wrapper *ngIf="model.candidati"
+    [options]="{ type: 'primary', title:'Candidati', isCollapsed: true, subtitle: 'Totale candidati: '+getCount(model.candidati)  }">
+    <table>
+      <tr>
+        <p class="angular-with-newlines">{{ model.candidati }}</p>
+      </tr>
+    </table>
+  </app-collapse-riquadro-wrapper>
+  <app-collapse-riquadro-wrapper *ngIf="model.commissione"
+    [options]="{ type: 'primary', title:'Commissione', isCollapsed: true, subtitle: 'Totale membri: '+getCount(model.commissione) }">
+    <table>
+      <tr>
+        <p class="angular-with-newlines">{{ model.commissione }}</p>
+      </tr>
+    </table>
+  </app-collapse-riquadro-wrapper>
+  <!--Allegati-->
+  <app-collapse-riquadro-wrapper [options]="{ type: 'primary', title:'Documentazione allegata al bando' }"
+    *ngIf="model.attachments && model.attachments.length >0">
+    <table>
+      <tbody>
+
+        <tr class="row ml-1 mr-1" *ngFor="let attach of model.attachments">
+          <td style="width: 30px; padding-left: 10px;">
+            <span class="oi oi-paperclip iconic"></span>
+          </td>
+          <td>
+            <a href="javascript:void(0)" (click)="download(attach.id)" title="">
+              <span>{{ attach.description }} </span>
+            </a>
+          </td>
+        </tr>
+
+    </table>
+  </app-collapse-riquadro-wrapper>
+
+
+  <app-collapse-riquadro-wrapper *ngIf="model.comunicazioni && model.comunicazioni.length >0"
+    [options]="{ type: 'primary', title:'Comunicazioni', isCollapsed: true}">
+    <div class="row align-items-center" >
+      <div class="col-sm">
+        <div class="table-responsive-sm">
+          <table class="table table-sm table-hover">
+            <thead>
+              <tr class="row ml-1 mr-1">
+                <th class="col-sm-2">{{ 'inviatoa' | translate }}</th>
+                <th class="col-sm-7">{{ 'oggetto' | translate }}</th>
+                <th class="col-sm-3 text-center">Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row ml-1 mr-1" *ngFor="let com of model.comunicazioni" (click)="selectCom($event, com)" [ngClass] = "{'table-secondary' : com===currentCom}">
+                <td class="col-sm-2">{{ com.gruppo | translate }}</td>
+                <td class="col-sm-7">{{ com.oggetto }}</td>
+                <td class="col-sm-3  text-center">{{  com.created_at  }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-sm" *ngIf="currentCom">
+        <app-riquadro-wrapper class="mt-1">
+          <button class="btn btn-sm float-right" type="button" (click)="currentRemove()">
+            <span class="oi oi-circle-x text-danger"></span>         
+          </button>
+          <div class="row mb-1 pb-1">
+            <app-list-item class="col-md-12" label="{{ 'inviatoa' | translate }}">{{ currentCom.gruppo | translate }}</app-list-item>
+            <app-list-item class="col-md-12" label="{{ 'oggetto' | translate }}">{{ currentCom.oggetto }}</app-list-item>
+          </div>
+          <app-collapse-riquadro-wrapper class="pt-1" [options]="{type: 'secondary', title:'Corpo testo'}">
+            <p class="angular-with-newlines">{{ currentCom.corpo_testo }} </p>
+          </app-collapse-riquadro-wrapper>
+
+        </app-riquadro-wrapper>
+      
+      </div>
+    </div>
+    <!-- | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize"
+  <div *ngIf="totalItems > pageSize">
+    <ngb-pagination class="d-flex justify-content-center" [collectionSize]="totalItems" [(page)]="page" [pageSize]="pageSize" ></ngb-pagination>
+  </div> -->
+
+  </app-collapse-riquadro-wrapper>
+
+  <!--Finestra di invio email-->
+  <app-riquadro-wrapper *ngIf="gestioneinformazioni">
+    <h6>{{ 'informazioni' | translate }}</h6>
+    <form [formGroup]="form" *ngIf="model">
+      <formly-form [model]="model2" [fields]="fields2" [form]="form" [options]="options"></formly-form>
+    </form>
+    <div class="form-footer text-right">
+      <button class="btn btn-sm btn-danger rounded m-1" (click)="sendInfoEmail()" [disabled]="form.invalid"
+        title="{{ 'sendemail' | translate }}">{{ 'sendemail' | translate }}</button>
+    </div>
+  </app-riquadro-wrapper>
+
+  <div class="form-footer text-right">
+    <div class="btn-group  mr-2 mb-1" *ngIf="model">
+
+      <!-- *ngxPermissionsOnly="['OP_DOCENTE','SUPER-ADMIN']" -->
+
+      <button type="button" class="btn btn-outline-secondary rounded mr-1" (click)="toggleGestioneInformazioni()"
+        *ngxPermissionsOnly="['OP_UFF_AMM', 'SUPER-ADMIN']">
+        <span class="oi oi-chat iconic"></span>
+        <span class="ml-2">Invio comunicazioni</span>
+      </button>
+
+      <button *ngIf="model" class="btn btn-outline-secondary rounded mr-1" (click)="update()">
+        <span class="oi oi-pencil iconic" title="{{ 'btn_upd_title' | translate }}"></span>
+        <span class="ml-2">{{ 'btn_upd_title' | translate }}</span>
+      </button>
+    </div>
+  </div>
+</div>

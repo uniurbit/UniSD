@@ -1,0 +1,45 @@
+<app-collapse-wrapper [options]="{title:'Seleziona il bando per visionare le domande', type:'warning'}">
+    <app-bandocommissioneresult [postname]="'commissione_bandi'" [querymodel]="querybandi"
+        (change)="dmncomres.selectionChange($event); selectionChange($event)"></app-bandocommissioneresult>
+</app-collapse-wrapper>
+
+<app-collapse-riquadro-wrapper
+    [options]="{ type: 'primary', title:'Dettaglio selezione' }">
+
+    <div class="m-2"></div>
+<app-collapse-wrapper  *ngIf="model" [options]="{title:'Bando - '+ model.descrizione, type:'info'}">
+    <div class="row m-2">
+        <app-list-item class="col-md-12" label="{{ 'bando_label1' | translate }}">{{ model.descrizione }}
+        </app-list-item>
+        <app-list-item class="col-md-12" label="{{ '00_int2' | translate }}">
+            {{ model.periodo_inizio }}/{{ model.periodo_fine }}</app-list-item>
+        <app-list-item class="col-md-12" label="Data chiusura">
+                {{ model.data_fine }}</app-list-item>
+    </div>
+    <!--Allegati-->
+    <ng-container *ngIf="model && model.attachments && model.attachments.length >0">
+        <table class="mb-1">
+            <tbody>
+
+                <tr class="row ml-1 mr-1" *ngFor="let attach of model.attachments">
+                    <td style="width: 30px; padding-left: 10px;">
+                        <span class="oi oi-paperclip iconic"></span>
+                    </td>
+                    <td>
+                        <a href="javascript:void(0)" (click)="download(attach.id)" title="">
+                            <span>{{ attach.description }} </span>
+                        </a>
+                    </td>
+                </tr>
+        </table>
+    </ng-container>
+</app-collapse-wrapper>
+
+
+<app-collapse-wrapper  [options]="{title:'Lista domande', type:'info'}">
+    <app-domandacommissioneresult #dmncomres [postname]="'docenti_domande'" [querymodelres]="querydomande">
+    </app-domandacommissioneresult>
+    <p class="p-2 mb-0">Vengono mostrate le domande inoltrate solo per i bandi la cui procedura di selezione è terminata.</p>
+</app-collapse-wrapper>
+
+</app-collapse-riquadro-wrapper>

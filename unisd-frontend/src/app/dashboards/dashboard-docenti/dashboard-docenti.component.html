@@ -1,0 +1,8 @@
+<app-collapse-wrapper [options]="{title:'Seleziona il bando per presentare la domanda', type:'warning'}">
+    <app-bandoresult [postname]="'docenti_bandi'" [querymodel]="querybandi"></app-bandoresult>
+</app-collapse-wrapper>
+
+
+<app-collapse-wrapper [options]="{title:'Lista domande inoltrate o in bozza', type:'info'}">
+    <app-domandaresult [postname]="'docenti_domande'" [querymodel]="querydomande"></app-domandaresult>
+</app-collapse-wrapper>

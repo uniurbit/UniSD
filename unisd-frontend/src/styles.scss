@@ -1,0 +1,200 @@
+/* You can add global styles to this file, and also import other style files */
+/* @import "~bootstrap-italia/dist/css/bootstrap-italia.min.css";  */
+
+@import '~bootstrap/scss/bootstrap.scss'; 
+
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/themes/bootstrap.css';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+@import '~ag-grid-community/dist/styles/ag-grid.css'; 
+@import '~ag-grid-community/dist/styles/ag-theme-balham.css'; 
+
+
+.display-flex { display: flex; }
+
+.flex-1 { flex: 1; }
+
+.flex-2 { flex: 2; }
+
+.flex-3 { flex: 3; }
+
+.flex-4 { flex: 4; }
+
+.flex-5 { flex: 5; }
+
+.flex-6 { flex: 6; }
+
+[class*="flex-"] {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+[class*="flex-"]:first-child {
+  padding-left: 0;
+}
+
+[class*="flex-"]:nth-last-child(2) {
+  padding-right: 0;
+}
+
+  // fix ellipsis on cells
+.datatable-body-cell-label {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+      
+.ngx-datatable .datatable-body-row.active:hover, 
+.ngx-datatable .datatable-body-row.active:hover .datatable-row-group, 
+.ngx-datatable .datatable-body-row.active:hover,
+.ngx-datatable .datatable-body-row.active:hover .datatable-row-group {
+	background-color: #d8d2fa;
+}
+
+.ngx-datatable .datatable-body-row.active,	
+.ngx-datatable .datatable-body-row.active .datatable-row-group,
+.ngx-datatable .datatable-body-row.active,	
+.ngx-datatable .datatable-body-row.active .datatable-row-group  {
+	background-color: #d8d2fa;
+}
+
+.ng-select.custom {
+  border:0px;
+  min-height: 0px;
+  border-radius: 0;
+}
+.ng-select.custom .ng-select-container  {            
+  min-height: 0px;
+  border-radius: 0;
+}
+
+  // styles in src/style directory are applied to the whole page  
+  .oi { top: 0px !important; }
+
+  // Right-To-Left layout for the Islamic Calendars
+  ngb-datepicker.rtl {
+    direction: rtl;
+  }
+  
+  ngb-datepicker.rtl ngb-datepicker-navigation-select select.custom-select {
+    background-position: left 0.25rem center;
+  }
+  // Useful to modify this to flex-start for multiple calendar only
+  ngb-datepicker.rtl .ngb-dp-arrow.right {
+    justify-content: center;
+  }
+  // Useful to modify this to flex-end for multiple calendar only
+  ngb-datepicker.rtl .ngb-dp-arrow {
+    justify-content: center;
+  }
+  
+  ngb-datepicker.rtl .ngb-dp-arrow-btn {
+    padding: 0;
+  }
+  
+  ngb-datepicker.rtl .ngb-dp-arrow.right .ngb-dp-navigation-chevron:before {
+    transform: rotate(-135deg);
+    margin: 0 0 0 0.5rem;
+  }
+  
+  ngb-datepicker.rtl .ngb-dp-navigation-chevron::before {
+    transform: rotate(45deg);
+    margin: 0 0.5rem 0 0;
+  }
+  
+  ngb-carousel {
+    .carousel-item img {
+      width: 100%;
+    }
+  }
+ 
+  
+  .iconic {
+    border: none; 
+    font-size: 13px;
+    color: #328ba8;
+  }
+
+
+  .angular-with-newlines {
+    white-space: pre-wrap;
+  }
+
+ .angular-editor-toolbar-set {
+    .block-label {
+      display: none;
+    }
+  }
+
+ 
+ 
+
+   .angular-editor-button[title='Subscript'],
+   .angular-editor-button[title='Insert Link'],
+   .angular-editor-button[title='Superscript'],
+   .angular-editor-button[title='Text Color'],
+   .angular-editor-button[title='Insert Image'],
+   .angular-editor-button[title='Background Color'],
+   .angular-editor-button[title='Custom Style'],
+   .angular-editor-button[title='Insert Video'],
+   .angular-editor-button[title='Horizontal Line'],
+   .angular-editor-button[title='Clear Formatting'],
+   .angular-editor-button[title='HTML Code'],
+   .angular-editor-button[title='Font Name'],
+   .angular-editor-button[title='Justify Left'],
+   .angular-editor-button[title='Justify Center'],
+   .angular-editor-button[title='Justify Right'],
+   .angular-editor-button[title='Justify Full'],
+   .angular-editor-button[title='Indent'],
+   .angular-editor-button[title='Outdent'], 
+   .angular-editor-button[title='Unordered List'], 
+   .angular-editor-button[title='Ordered List'], 
+   .angular-editor-button[title='Unlink'], 
+   .angular-editor-button[title='Underline'],
+   .angular-editor-button[title='Strikethrough'],
+   select[title='Formatting'],
+   select[title='Font Name'],
+   select[title='Font Size'],
+   #fontSizeSelector-,
+   #fontSelector-,
+   #heading-,
+   #unlink-,
+   #customClassSelector- {
+    display: none;
+  }
+
+  app-form-wysiwyg-type {
+    div.angular-editor-toolbar-set
+    {
+      &:nth-child(3),
+      &:nth-child(4),
+      &:nth-child(5),
+      &:nth-child(6),
+      &:nth-child(7),
+      &:nth-child(8),
+      &:nth-child(9),
+      &:nth-child(10),
+      &:nth-child(11),
+      &:nth-child(12)
+      {
+        display: none !important; 
+      }
+        
+    }
+  }
+  
+  app-form-wysiwyg-type {
+    div.is-invalid,
+    div.ng-invalid {
+      border:1px solid #dc3545;
+    }
+  }
+
+  app-form-wysiwyg-type {
+    b, strong {
+      font-weight: bold
+    }
+  }

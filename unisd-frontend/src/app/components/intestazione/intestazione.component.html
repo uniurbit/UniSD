@@ -1,0 +1,32 @@
+
+  <app-riquadro-wrapper>    
+      <h4 class="text-center mb-1 mu-1">DOMANDA DI PARTECIPAZIONE ALLA PROCEDURA DI VALUTAZIONE DI ATENEO<br>
+          PER L'ATTRIBUZIONE DEGLI SCATTI STIPENDIALI</h4>
+  </app-riquadro-wrapper>
+  <app-riquadro-wrapper *ngIf="item">    
+      <div class="row">
+        <app-list-item class="col-md-12" label="{{ '00_int1' | translate }}"><span style="font-weight: bold;">{{ item.user.nome }} {{ item.user.cognome }}</span></app-list-item>    
+        <app-list-item class="col-md-12" label="{{ 'bando_label1' | translate }}">{{ item.descrizione }}</app-list-item>                    
+        <app-list-item class="col-md-12" label="{{ '00_int2' | translate }}">{{ item.periodo_inizio }}/{{ item.periodo_fine }}</app-list-item>                    
+        <app-list-item class="col-md-12" label="{{ '00_int4' | translate }}">{{ item?.current_state }}</app-list-item>                    
+        <app-list-item *ngIf="item?.domanda?.num_prot" class="col-md-12" label="{{ '00_int3' | translate }}">{{ item.domanda.num_prot }}</app-list-item>                    
+      </div>
+  </app-riquadro-wrapper>
+  <!--Allegati-->
+<app-collapse-riquadro-wrapper  [options]="{ type: 'primary', title:'Documentazione allegata al bando' }" *ngIf="item.attachments && item.attachments.length >0" >     
+  <table>
+      <tbody>
+          
+      <tr class="row ml-1 mr-1" *ngFor="let attach of item.attachments">
+      <td style="width: 30px; padding-left: 10px;">
+        <span class="oi oi-paperclip iconic"></span>
+      </td>
+      <td>
+        <a href="javascript:void(0)"  (click)="onClickAttach(attach.id)" title="">
+          <span>{{ attach.description }} </span>
+        </a>
+      </td>
+    </tr>
+
+  </table>
+  </app-collapse-riquadro-wrapper>

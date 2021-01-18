@@ -1,0 +1,20 @@
+
+
+  <ngx-loading [show]="isLoading" [config]="{ backdropBorderRadius: '4px' }"></ngx-loading>
+  <form [formGroup]="form" >
+  <formly-form [model]="model" [fields]="resultMetadata" [form]="form">
+    
+  </formly-form> 
+  </form>
+ 
+  <ng-template #converter ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" >
+      <span [ngSwitch]="value">                        
+          <span *ngSwitchCase="'TO'">Titolo oneroso</span>                        
+          <span *ngSwitchCase="'TG'">Titolo gratuito</span> 
+      </span>
+  </ng-template>  
+
+  <ng-template #tooltip let-row="row" let-value="value" let-i="index">
+    <span title="{{ value+'_tooltip' | translate}}"> {{ value | translate }} </span>
+  </ng-template>
+

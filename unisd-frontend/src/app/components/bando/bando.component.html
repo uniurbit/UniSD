@@ -1,0 +1,34 @@
+<div class="container-fluid">
+    <ngx-loading [show]="isLoading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+    <h4 *ngIf="title">{{title}}</h4>
+
+    <div class="btn-toolbar mb-4 text-right" role="toolbar">
+        <div class="btn-group">
+            <button class="btn btn-outline-primary rounded-lg ml-1" [disabled]="!form.valid || !form.dirty" (click)="onSubmit()"  *ngxPermissionsOnly="['ADMIN','SUPER-ADMIN','OP_UFF_AMM']">
+                <span class="oi oi-arrow-top"></span>
+                <span class="ml-2">Aggiorna</span>
+            </button>
+            <button *ngIf="isReloadable" class="btn btn-outline-primary rounded-lg ml-1" (click)="onReload()" [disabled]="!form.dirty">
+                <span class="oi oi-reload iconic" title="reload" aria-hidden="true"></span>
+                <span class="ml-2">Ricarica</span>
+            </button>
+            <button *ngIf="researchPath" class="btn btn-outline-primary rounded-lg ml-1" (click)="onResearch()">
+                <span class="oi oi-magnifying-glass"></span>
+                <span class="ml-2">Ricerca</span>
+            </button>
+            <button *ngIf="isRemovable && activeNew" class="btn btn-outline-primary rounded-lg ml-1" (click)="onRemove()">
+                <span class="oi oi-trash"></span>  
+                <span class="ml-2">Rimuovi</span>
+            </button>
+        </div>
+    </div>
+    
+
+    <form [formGroup]="form" *ngIf="model">
+        <formly-form [model]="model" [fields]="fields" [form]="form" [options]="options">
+
+        </formly-form>
+    </form>
+
+    <app-salva-annulla-button [isNew]="!update" [fields]="fields" [formRef]="form" (valid)="onSubmit()"></app-salva-annulla-button> 
+</div>

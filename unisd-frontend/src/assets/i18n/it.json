@@ -1,0 +1,83 @@
+{   
+    "NODATA": "Nessun dato",
+    "TOTAL": "Totali",
+
+    "system_null": "Non a sistema",
+    
+    "prima": "Prima sessione",
+    "seconda": "Seconda sessione",
+    
+    "txt_si": "Si",
+    "txt_no": "No",
+
+    "btn_save" : "SALVA",
+    "btn_save_title" : "SALVA",
+    "btn_annulla" : "ANNULLA",
+    "btn_annulla_title" : "ANNULLA",
+    "btn_upd_title" : "Modifica",
+    "btn_del_title" : "ELIMINA",
+    "btn_end_title" : "TERMINA E INOLTRA",
+    "btn_end" : "TERMINA",
+
+    "bando_candidati": "Candidati",
+    "bando_title1": "Gestione allegati", 
+    "bando_label1": "Titolo bando",
+    "a1_label21": "Allegato",
+    "file_label1": "Titolo allegato",
+    "file_label2": "Documento",
+    "bando_commissione": "Commissione",
+
+    "00_int1": "Richiedente",
+    "00_int2": "Periodo",
+    "00_int3": "Numero protocollo",
+    "00_int4": "Stato",
+
+    "label_codicefiscale": "Codicefiscale",
+    "a1_docum" : "Documentazione allegata",
+    "summary_txt3_bozza" : "Domanda (bozza)",
+    "summary_txt3_inoltrata" : "Domanda",
+    "summary_title4": "Visualizza domanda",
+
+    "bando_periodo_inizio": "Anno solare inizio periodo",
+    "bando_periodo_fine": "Anno solare fine periodo",
+
+    "d1_title1": "Dichiara con riferimento all'attività didattica",
+    "d1_label_on":"adempiuto ai compiti didattici affidati nel {{periodo}} accademico precedente la data della presente domanda.",
+    "d1_label_off":"svolto attività didattica.",
+    "d1_label1":"fruito di periodi di assenza dal servizio nel {{periodo}} accademico precedente la data della presente domanda.",
+
+    "didattica_conferma": "quanto dichiarato nell’attestazione sull’attività didattica rilasciata dalle strutture didattiche.",
+    "didattica_conferma_on": "di confermare quanto dichiarato nell’attestazione sull’attività didattica rilasciata dalle strutture didattiche.",
+    "didattica_conferma_off": "di non confermare quanto dichiarato nell’attestazione sull’attività didattica rilasciata dalle strutture didattiche.",
+
+    "d1_title2": "Dichiara con riferimento all'attività di ricerca",
+    "d1_label2": "conferito prodotti della ricerca a processi di valutazione della stessa nel {{periodo}} solare precedente la data della presente domanda, fatto salvo quanto previsto dall'art. 7, comma 2, del Regolamento di Ateneo.",
+
+    "d1_title3": "Dichiara con riferimento all'attività gestionale",
+    "d1_label3":"svolto attività gestionali nel {{periodo}} accademico precedente la data della presente domanda, fatto salvo quanto disposto dall'art. 7, comma 2, del Regolamento di Ateneo.",
+    
+    "d1_title4": "Infine dichiara",
+    "d1_label4":"stato destinatario di una sanzione disciplinare nel {{periodo}} di riferimento e di essere consapevole delle responsabilità penali previste dagli artt. 75 e 76 del D.P.R. 445/2000 e s.m.i. per le ipotesi di falsità in atti e dichiarazioni mendaci.",
+
+    "nuova_istanza": "La presente domanda sostituisce integralmente le precedenti inoltrate.",
+
+    "periodo_0": "periodo",
+    "periodo_1": "biennio",
+    "periodo_2": "triennio",
+    "periodo_3": "quadriennio",
+
+    "non_compilata": "Non compilata",
+    "inoltrata": "Inoltrata (sostituita)",
+    "bozza": "Bozza",
+    "inoltrata_ultima": "Inoltrata",
+
+    "informazioni" : "Comunicazione",
+    "sendemail" : "Invia comunicazione",
+
+    "COMMISSIONE": "Commissione",
+    "CANDIDATI": "Candidati",
+
+    "inviatoa": "Inviato a",
+    "oggetto": "Oggetto"
+}
+    
