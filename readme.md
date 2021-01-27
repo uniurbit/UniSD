@@ -35,7 +35,7 @@ UniSD è una applicazione web per la gestione delle domande per gli scatti stipe
     - [Laravel](https://laravel.com/) 
     - [Angular](https://angular.io/)
     - [Dynamic forms in Angular](https://formly.dev/)
-- [Schermate UniContr](UniContr.pdf)
+
 
 ## Creazione di una applicazione
 
