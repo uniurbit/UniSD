@@ -1,0 +1,129 @@
+# This repository adheres to the publiccode.yml standard by including this 
+# metadata file that makes public software easily discoverable.
+# More info at https://github.com/italia/publiccode.yml
+
+publiccodeYmlVersion: '0.2'
+categories:
+  - employee-management
+dependsOn:
+  open:
+    - name: MariaDB
+      optional: false
+      version: '10.3.22'
+      versionMax: '10.5'
+      versionMin: '10.2'
+    - name: php
+      optional: false
+      version: '7.3'
+      versionMax: '7.4'
+      versionMin: '7.3'
+description:
+  it:
+    documentation: 'https://github.com/uniurbit/UniSD'
+    features:
+      - Protocollazione automatizzata
+      - SSO SAML2
+      - Integrazione con Titulus
+    genericName: applicazione web
+    longDescription: |
+      UniSD è una applicazione web per la gestione delle domande per gli scatti
+      stipendiali dei docenti. L'applicazione è basata su Web API e sviluppata
+      sul framework Laravel per la parte backend, Angular per la parte frontend
+      e  SAML2 come sistema di autenticazione.
+
+
+      Funzionalità:
+
+
+      - Gestione degli avvisi:
+
+
+      - Data inizio e data fine della procedura
+
+      - Documentazione allegata all'avviso
+
+      - Fascicolazione domande
+
+      - Elenco dei candidati
+
+      - Elenco membri della commissione
+
+      - Perido di riferimento della procedura
+
+      - Modello domanda ai sensi dell'art. 6, comma 14, della legge 240/2010
+
+      - Modello domanda ai sensi dell'art. 1, comma 629, della legge 27 dicembre
+      2017, n. 205 ai sensi dell'art. 6, comma 14, della legge 240/2010
+
+
+      - Gestione domande:
+
+
+      - Inserimento attività didattica, di richerca e gestionale
+
+      - Modifica della domanda non inoltrata
+
+      - Protocollazione della domanda inoltrata
+
+
+      - Dashboard commissione
+
+
+      - Dashboard docente:
+
+
+      - Elenco delle procedure per cui può presentare domanda
+
+      - Elenco delle domande presentate
+
+
+      ​
+    shortDescription: |-
+      Applicazione web per la gestione delle domande per gli scatti stipendiali
+      dei docenti.
+developmentStatus: stable
+intendedAudience:
+  scope:
+    - employment
+it:
+  conforme:
+    gdpr: true
+    lineeGuidaDesign: false
+    misureMinimeSicurezza: true
+    modelloInteroperabilita: false
+  countryExtensionVersion: '0.2'
+  piattaforme:
+    anpr: false
+    cie: false
+    pagopa: false
+    spid: false
+  riuso:
+    codiceIPA: usucb
+landingURL: 'https://github.com/uniurbit/UniSD'
+legal:
+  license: AGPL-3.0-only
+  mainCopyrightOwner: Università degli Studi di Urbino Carlo Bo
+localisation:
+  availableLanguages:
+    - it
+  localisationReady: false
+maintenance:
+  contacts:
+    - affiliation: UniUrb
+      email: marco.cappellacci@uniurb.it
+      name: Marco Cappellacci
+    - affiliation: UniUrb
+      email: enrico.oliva@uniurb.it
+      name: Enrico Oliva
+  type: internal
+name: UniSD
+platforms:
+  - linux
+  - web
+releaseDate: '2020-04-01'
+roadmap: 'https://github.com/uniurbit/UniSD/issues'
+softwareType: standalone/web
+softwareVersion: '1.0'
+url: 'https://github.com/uniurbit/UniSD'
+usedBy:
+  - 'https://www.uniurb.it'
